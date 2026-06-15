@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Botando a vida em ordem</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f4f0; color: #1a1a18; min-height: 100vh; }
+  .app { max-width: 480px; margin: 0 auto; padding: 20px 16px 48px; }
+  .header { padding: 24px 0 16px; border-bottom: 1px solid #e2e0d8; margin-bottom: 16px; }
+  .app-title { font-size: 20px; font-weight: 600; color: #1a1a18; }
+  .app-sub { font-size: 13px; color: #888780; margin-top: 3px; }
+  .season-bar { background: #fff; border: 1px solid #e2e0d8; border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; }
+  .season-name { font-size: 15px; font-weight: 600; color: #1a1a18; }
+  .season-dates { font-size: 12px; color: #888780; margin-top: 2px; }
+  .days-right { text-align: right; }
+  .days-season { font-size: 20px; font-weight: 600; color: #1a1a18; }
+  .days-label { font-size: 11px; color: #888780; }
+  .days-wedding { font-size: 11px; color: #888780; margin-top: 2px; }
+  .progress-wrap { margin-bottom: 4px; }
+  .progress-header { display: flex; justify-content: space-between; font-size: 12px; color: #888780; margin-bottom: 6px; }
+  .progress-track { height: 5px; background: #e2e0d8; border-radius: 3px; }
+  .progress-fill { height: 5px; border-radius: 3px; background: #378add; transition: width 0.4s; }
+  .divider { height: 1px; background: #e2e0d8; margin: 18px 0; }
+  .tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px; }
+  .tab { padding: 11px; border: 1px solid #e2e0d8; border-radius: 10px; background: #fff; font-size: 14px; font-weight: 500; color: #888780; cursor: pointer; text-align: center; transition: all 0.15s; }
+  .tab.active { border-color: #378add; color: #185fa5; background: #e6f1fb; }
+  .score-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+  .score-card { background: #fff; border: 1px solid #e2e0d8; border-radius: 12px; padding: 16px; text-align: center; transition: border-color 0.2s; }
+  .score-card.leading { border-color: #1d9e75; }
+  .score-name { font-size: 13px; color: #888780; margin-bottom: 6px; }
+  .score-num { font-size: 36px; font-weight: 600; color: #1a1a18; line-height: 1; }
+  .score-label { font-size: 11px; color: #888780; margin-top: 4px; }
+  .leading-badge { font-size: 11px; font-weight: 600; background: #e1f5ee; color: #0f6e56; padding: 3px 10px; border-radius: 20px; display: inline-block; margin-top: 8px; }
+  .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: #b4b2a9; margin-bottom: 10px; }
+  .habit-card { background: #fff; border: 1px solid #e2e0d8; border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; }
+  .habit-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .habit-name { font-size: 15px; font-weight: 500; color: #1a1a18; display: flex; align-items: center; gap: 8px; }
+  .habit-pts { font-size: 12px; color: #b4b2a9; }
+  .check-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .check-btn { padding: 10px 8px; border: 1px solid #e2e0d8; border-radius: 8px; background: #f5f4f0; font-size: 13px; font-weight: 500; color: #888780; cursor: pointer; text-align: center; transition: all 0.15s; }
+  .check-btn:active { transform: scale(0.97); }
+  .check-btn.done-c { background: #e1f5ee; border-color: #1d9e75; color: #085041; }
+  .check-btn.done-b { background: #e6f1fb; border-color: #378add; color: #042c53; }
+  .streak-row { display: flex; gap: 5px; margin-top: 10px; }
+  .streak-dot { width: 22px; height: 22px; border-radius: 50%; background: #f5f4f0; border: 1px solid #e2e0d8; display: flex; align-items: center; justify-content: center; font-size: 9px; color: #b4b2a9; flex-shrink: 0; }
+  .streak-dot.c { background: #e1f5ee; border-color: #1d9e75; color: #085041; }
+  .streak-dot.b { background: #e6f1fb; border-color: #378add; color: #042c53; }
+  .streak-dot.both { background: #f0edfd; border-color: #7f77dd; color: #26215c; }
+  .reset-btn { width: 100%; padding: 12px; margin-top: 16px; background: transparent; border: 1px solid #d3d1c7; border-radius: 10px; font-size: 13px; color: #888780; cursor: pointer; transition: background 0.15s; }
+  .reset-btn:hover { background: #f5f4f0; }
+  .history-row { display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px solid #e2e0d8; font-size: 13px; }
+  .history-row:last-child { border-bottom: none; }
+  .history-date { color: #5f5e5a; }
+  .history-pts { display: flex; gap: 20px; }
+  .pt-c { color: #0f6e56; font-weight: 600; }
+  .pt-b { color: #185fa5; font-weight: 600; }
+  .empty-state { font-size: 13px; color: #b4b2a9; padding: 12px 0; text-align: center; }
+  .new-season-btn { width: 100%; padding: 12px; margin-top: 12px; background: #e6f1fb; border: 1px solid #378add; border-radius: 10px; font-size: 14px; font-weight: 600; color: #185fa5; cursor: pointer; }
+  .new-season-btn:hover { background: #b5d4f4; }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <div class="app-title">Botando a vida em ordem 💍</div>
+    <div class="app-sub">até o casamento — 24 de abril de 2027</div>
+  </div>
+  <div class="season-bar">
+    <div>
+      <div class="season-name" id="season-name">Temporada 1</div>
+      <div class="season-dates" id="season-dates"></div>
+    </div>
+    <div class="days-right">
+      <div class="days-season" id="days-season">—</div>
+      <div class="days-label">dias restantes</div>
+      <div class="days-wedding" id="days-wedding"></div>
+    </div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-header">
+      <span>Progresso da temporada</span>
+      <span id="prog-pct">0%</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+  </div>
+  <div class="divider"></div>
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('hoje')">Hoje</button>
+    <button class="tab" onclick="showTab('placar')">Placar</button>
+  </div>
+  <div id="tab-hoje">
+    <div class="score-grid">
+      <div class="score-card" id="card-c-hoje"><div class="score-name">Camila</div><div class="score-num" id="pts-c-hoje">0</div><div class="score-label">pts hoje</div></div>
+      <div class="score-card" id="card-b-hoje"><div class="score-name">Bruno</div><div class="score-num" id="pts-b-hoje">0</div><div class="score-label">pts hoje</div></div>
+    </div>
+    <div class="section-label">Hábitos de hoje</div>
+    <div id="habits-list"></div>
+    <button class="reset-btn" onclick="resetDay()">↺ Resetar dia</button>
+  </div>
+  <div id="tab-placar" style="display:none">
+    <div class="score-grid">
+      <div class="score-card" id="card-c-placar"><div class="score-name">Camila</div><div class="score-num" id="pts-c-placar">0</div><div class="score-label">pts na temporada</div></div>
+      <div class="score-card" id="card-b-placar"><div class="score-name">Bruno</div><div class="score-num" id="pts-b-placar">0</div><div class="score-label">pts na temporada</div></div>
+    </div>
+    <div class="section-label">Histórico recente</div>
+    <div id="history-list"></div>
+    <div class="divider"></div>
+    <div class="section-label">Placar geral — todas as temporadas</div>
+    <div class="score-grid" style="margin-bottom:16px">
+      <div class="score-card"><div class="score-name">Camila</div><div class="score-num" id="total-c">0</div><div class="score-label">pts totais</div></div>
+      <div class="score-card"><div class="score-name">Bruno</div><div class="score-num" id="total-b">0</div><div class="score-label">pts totais</div></div>
+    </div>
+    <button class="new-season-btn" onclick="newSeason()">🏆 Encerrar temporada e iniciar nova</button>
+  </div>
+</div>
+<script>
+const HABITS=[{id:'ativ',name:'Atividade física',icon:'🏃'},{id:'leit',name:'Leitura',icon:'📖'},{id:'diet',name:'Dieta',icon:'🥗'},{id:'agua',name:'Beber água',icon:'💧'},{id:'pess',name:'Tempo pessoal',icon:'🌱'}];
+const SEASON_WEEKS=6;
+const WEDDING=new Date('2027-04-24');
+function getState(){try{const r=localStorage.getItem('blvo_v2');if(r)return JSON.parse(r);}catch(e){}return{days:{},season:1,seasonStart:'2025-07-01',totalC:0,totalB:0};}
+function save(s){try{localStorage.setItem('blvo_v2',JSON.stringify(s));}catch(e){}}
+let S=getState();
+function todayKey(){return new Date().toISOString().slice(0,10);}
+function ensureDay(k){if(!S.days[k])S.days[k]={c:{},b:{}};return S.days[k];}
+function ptsDay(k,who){if(!S.days[k])return 0;return Object.values(S.days[k][who]||{}).filter(Boolean).length;}
+function seasonPts(){const start=new Date(S.seasonStart+'T12:00:00');let c=0,b=0;Object.entries(S.days).forEach(([k,v])=>{const d=new Date(k+'T12:00:00');if(d>=start){c+=Object.values(v.c||{}).filter(Boolean).length;b+=Object.values(v.b||{}).filter(Boolean).length;}});return{c,b};}
+function renderSeason(){const start=new Date(S.seasonStart+'T12:00:00');const end=new Date(start);end.setDate(end.getDate()+SEASON_WEEKS*7-1);const now=new Date();const daysLeft=Math.max(0,Math.ceil((end-now)/86400000));const total=SEASON_WEEKS*7;const elapsed=Math.min(total,Math.max(0,Math.ceil((now-start)/86400000)));const pct=Math.round((elapsed/total)*100);const wDays=Math.max(0,Math.ceil((WEDDING-now)/86400000));const fmt=d=>d.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'});document.getElementById('season-name').textContent='Temporada '+S.season;document.getElementById('season-dates').textContent=fmt(start)+' – '+fmt(end);document.getElementById('days-season').textContent=daysLeft;document.getElementById('days-wedding').textContent=wDays+' dias p/ casamento';document.getElementById('prog-pct').textContent=pct+'%';document.getElementById('prog-fill').style.width=pct+'%';}
+function renderHabits(){const k=todayKey();const td=ensureDay(k);const recentKeys=Object.keys(S.days).sort().slice(-7).filter(d=>d!==k);document.getElementById('pts-c-hoje').textContent=ptsDay(k,'c');document.getElementById('pts-b-hoje').textContent=ptsDay(k,'b');const list=document.getElementById('habits-list');list.innerHTML=HABITS.map(h=>{const dC=td.c[h.id]||false;const dB=td.b[h.id]||false;const dots=recentKeys.map(rk=>{const rc=S.days[rk]?.c?.[h.id];const rb=S.days[rk]?.b?.[h.id];const cls=rc&&rb?'both':rc?'c':rb?'b':'';const sym=rc||rb?'✓':'';return`<div class="streak-dot ${cls}">${sym}</div>`;}).join('');return`<div class="habit-card"><div class="habit-header"><div class="habit-name"><span>${h.icon}</span>${h.name}</div><span class="habit-pts">1 pt</span></div><div class="check-row"><button class="check-btn ${dC?'done-c':''}" onclick="toggle('${h.id}','c')">${dC?'✓':'○'} Camila</button><button class="check-btn ${dB?'done-b':''}" onclick="toggle('${h.id}','b')">${dB?'✓':'○'} Bruno</button></div>${recentKeys.length?`<div class="streak-row">${dots}</div>`:''}</div>`;}).join('');updateLeading();}
+function updateLeading(){const k=todayKey();const c=ptsDay(k,'c'),b=ptsDay(k,'b');['card-c-hoje','card-b-hoje'].forEach(id=>{const el=document.getElementById(id);el.classList.remove('leading');el.querySelector('.leading-badge')?.remove();});if(c>b){const el=document.getElementById('card-c-hoje');el.classList.add('leading');el.insertAdjacentHTML('beforeend','<div class="leading-badge">na frente 🏆</div>');}else if(b>c){const el=document.getElementById('card-b-hoje');el.classList.add('leading');el.insertAdjacentHTML('beforeend','<div class="leading-badge">na frente 🏆</div>');}}
+function toggle(id,who){const k=todayKey();ensureDay(k);S.days[k][who][id]=!S.days[k][who][id];save(S);renderHabits();renderPlacar();}
+function resetDay(){if(!confirm('Resetar todos os hábitos de hoje?'))return;const k=todayKey();S.days[k]={c:{},b:{}};save(S);renderHabits();renderPlacar();}
+function renderPlacar(){const{c,b}=seasonPts();document.getElementById('pts-c-placar').textContent=c;document.getElementById('pts-b-placar').textContent=b;document.getElementById('total-c').textContent=S.totalC+c;document.getElementById('total-b').textContent=S.totalB+b;['card-c-placar','card-b-placar'].forEach(id=>{const el=document.getElementById(id);el.classList.remove('leading');el.querySelector('.leading-badge')?.remove();});const{c:sc,b:sb}=seasonPts();if(sc>sb){const el=document.getElementById('card-c-placar');el.classList.add('leading');el.insertAdjacentHTML('beforeend','<div class="leading-badge">na frente 🏆</div>');}else if(sb>sc){const el=document.getElementById('card-b-placar');el.classList.add('leading');el.insertAdjacentHTML('beforeend','<div class="leading-badge">na frente 🏆</div>');}const hist=document.getElementById('history-list');const recent=Object.entries(S.days).sort((a,b)=>b[0].localeCompare(a[0])).slice(0,8);if(!recent.length){hist.innerHTML='<div class="empty-state">Nenhum registro ainda — começa hoje! 🌟</div>';return;}hist.innerHTML=recent.map(([date,v])=>{const pc=Object.values(v.c||{}).filter(Boolean).length;const pb=Object.values(v.b||{}).filter(Boolean).length;const d=new Date(date+'T12:00:00');const label=d.toLocaleDateString('pt-BR',{weekday:'short',day:'2-digit',month:'short'});return`<div class="history-row"><span class="history-date">${label}</span><div class="history-pts"><span class="pt-c">C: ${pc}pts</span><span class="pt-b">B: ${pb}pts</span></div></div>`;}).join('');}
+function newSeason(){const{c,b}=seasonPts();const winner=c>b?'Camila':b>c?'Bruno':'Empate';const msg=winner==='Empate'?`Temporada ${S.season} encerrada! Foi um empate — ${c} x ${b} pts.\n\nIniciar Temporada ${S.season+1}?`:`Temporada ${S.season} encerrada!\n🏆 Vencedor: ${winner} (${Math.max(c,b)} x ${Math.min(c,b)} pts)\n\nIniciar Temporada ${S.season+1}?`;if(!confirm(msg))return;S.totalC+=c;S.totalB+=b;S.season+=1;const newStart=new Date(S.seasonStart+'T12:00:00');newStart.setDate(newStart.getDate()+SEASON_WEEKS*7);S.seasonStart=newStart.toISOString().slice(0,10);save(S);renderSeason();renderHabits();renderPlacar();alert(`Temporada ${S.season} começou! Bora! 🚀`);}
+function showTab(t){document.getElementById('tab-hoje').style.display=t==='hoje'?'block':'none';document.getElementById('tab-placar').style.display=t==='placar'?'block':'none';document.querySelectorAll('.tab').forEach((el,i)=>{el.classList.toggle('active',(i===0&&t==='hoje')||(i===1&&t==='placar'));});}
+renderSeason();renderHabits();renderPlacar();
+</script>
+</body>
+</html>
