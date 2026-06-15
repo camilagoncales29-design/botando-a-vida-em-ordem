@@ -12,22 +12,21 @@
   .app-title { font-size: 20px; font-weight: 600; color: #1a1a18; }
   .app-sub { font-size: 13px; color: #888780; margin-top: 3px; }
   .season-bar { background: #fff; border: 1px solid #e2e0d8; border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; }
-  .season-name { font-size: 15px; font-weight: 600; color: #1a1a18; }
+  .season-name { font-size: 15px; font-weight: 600; }
   .season-dates { font-size: 12px; color: #888780; margin-top: 2px; }
   .days-right { text-align: right; }
-  .days-season { font-size: 20px; font-weight: 600; color: #1a1a18; }
+  .days-season { font-size: 20px; font-weight: 600; }
   .days-label { font-size: 11px; color: #888780; }
   .days-wedding { font-size: 11px; color: #888780; margin-top: 2px; }
-  .progress-wrap { margin-bottom: 4px; }
   .progress-header { display: flex; justify-content: space-between; font-size: 12px; color: #888780; margin-bottom: 6px; }
   .progress-track { height: 5px; background: #e2e0d8; border-radius: 3px; }
   .progress-fill { height: 5px; border-radius: 3px; background: #378add; transition: width 0.4s; }
   .divider { height: 1px; background: #e2e0d8; margin: 18px 0; }
-  .tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px; }
-  .tab { padding: 11px; border: 1px solid #e2e0d8; border-radius: 10px; background: #fff; font-size: 14px; font-weight: 500; color: #888780; cursor: pointer; text-align: center; transition: all 0.15s; }
+  .tabs { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 20px; }
+  .tab { padding: 10px 6px; border: 1px solid #e2e0d8; border-radius: 10px; background: #fff; font-size: 13px; font-weight: 500; color: #888780; cursor: pointer; text-align: center; transition: all 0.15s; }
   .tab.active { border-color: #378add; color: #185fa5; background: #e6f1fb; }
   .score-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-  .score-card { background: #fff; border: 1px solid #e2e0d8; border-radius: 12px; padding: 16px; text-align: center; transition: border-color 0.2s; }
+  .score-card { background: #fff; border: 1px solid #e2e0d8; border-radius: 12px; padding: 16px; text-align: center; transition: border-color 0.2s; position: relative; }
   .score-card.leading { border-color: #1d9e75; }
   .score-name { font-size: 13px; color: #888780; margin-bottom: 6px; }
   .score-num { font-size: 36px; font-weight: 600; color: #1a1a18; line-height: 1; }
@@ -36,29 +35,37 @@
   .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: #b4b2a9; margin-bottom: 10px; }
   .habit-card { background: #fff; border: 1px solid #e2e0d8; border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; }
   .habit-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-  .habit-name { font-size: 15px; font-weight: 500; color: #1a1a18; display: flex; align-items: center; gap: 8px; }
+  .habit-name { font-size: 15px; font-weight: 500; display: flex; align-items: center; gap: 8px; }
   .habit-pts { font-size: 12px; color: #b4b2a9; }
   .check-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .check-btn { padding: 10px 8px; border: 1px solid #e2e0d8; border-radius: 8px; background: #f5f4f0; font-size: 13px; font-weight: 500; color: #888780; cursor: pointer; text-align: center; transition: all 0.15s; }
   .check-btn:active { transform: scale(0.97); }
   .check-btn.done-c { background: #e1f5ee; border-color: #1d9e75; color: #085041; }
   .check-btn.done-b { background: #e6f1fb; border-color: #378add; color: #042c53; }
-  .streak-row { display: flex; gap: 5px; margin-top: 10px; }
+  .streak-row { display: flex; gap: 5px; margin-top: 10px; flex-wrap: wrap; }
   .streak-dot { width: 22px; height: 22px; border-radius: 50%; background: #f5f4f0; border: 1px solid #e2e0d8; display: flex; align-items: center; justify-content: center; font-size: 9px; color: #b4b2a9; flex-shrink: 0; }
   .streak-dot.c { background: #e1f5ee; border-color: #1d9e75; color: #085041; }
   .streak-dot.b { background: #e6f1fb; border-color: #378add; color: #042c53; }
   .streak-dot.both { background: #f0edfd; border-color: #7f77dd; color: #26215c; }
   .reset-btn { width: 100%; padding: 12px; margin-top: 16px; background: transparent; border: 1px solid #d3d1c7; border-radius: 10px; font-size: 13px; color: #888780; cursor: pointer; transition: background 0.15s; }
   .reset-btn:hover { background: #f5f4f0; }
-  .history-row { display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px solid #e2e0d8; font-size: 13px; }
-  .history-row:last-child { border-bottom: none; }
-  .history-date { color: #5f5e5a; }
-  .history-pts { display: flex; gap: 20px; }
+  .history-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .history-table th { text-align: left; padding: 8px 6px; color: #b4b2a9; font-weight: 500; font-size: 11px; border-bottom: 1px solid #e2e0d8; }
+  .history-table td { padding: 10px 6px; border-bottom: 1px solid #f0ede8; color: #5f5e5a; vertical-align: middle; }
+  .history-table tr:last-child td { border-bottom: none; }
   .pt-c { color: #0f6e56; font-weight: 600; }
   .pt-b { color: #185fa5; font-weight: 600; }
-  .empty-state { font-size: 13px; color: #b4b2a9; padding: 12px 0; text-align: center; }
+  .empty-state { font-size: 13px; color: #b4b2a9; padding: 20px 0; text-align: center; }
   .new-season-btn { width: 100%; padding: 12px; margin-top: 12px; background: #e6f1fb; border: 1px solid #378add; border-radius: 10px; font-size: 14px; font-weight: 600; color: #185fa5; cursor: pointer; }
   .new-season-btn:hover { background: #b5d4f4; }
+  .loading { text-align: center; padding: 20px; color: #888780; font-size: 13px; }
+  .sync-status { font-size: 11px; color: #b4b2a9; text-align: center; margin-top: 8px; }
+  .habit-bar { display: flex; gap: 3px; margin-top: 6px; }
+  .habit-cell { font-size: 10px; text-align: center; }
+  .habit-cell .dot { width: 18px; height: 18px; border-radius: 50%; margin: 0 auto 2px; display: flex; align-items: center; justify-content: center; font-size: 8px; }
+  .filter-row { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
+  .filter-btn { padding: 5px 12px; border: 1px solid #e2e0d8; border-radius: 20px; background: #fff; font-size: 12px; color: #888780; cursor: pointer; }
+  .filter-btn.active { border-color: #378add; color: #185fa5; background: #e6f1fb; }
 </style>
 </head>
 <body>
@@ -67,6 +74,7 @@
     <div class="app-title">Botando a vida em ordem 💍</div>
     <div class="app-sub">até o casamento — 24 de abril de 2027</div>
   </div>
+
   <div class="season-bar">
     <div>
       <div class="season-name" id="season-name">Temporada 1</div>
@@ -78,34 +86,39 @@
       <div class="days-wedding" id="days-wedding"></div>
     </div>
   </div>
-  <div class="progress-wrap">
-    <div class="progress-header">
-      <span>Progresso da temporada</span>
-      <span id="prog-pct">0%</span>
-    </div>
-    <div class="progress-track"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+
+  <div class="progress-header">
+    <span>Progresso da temporada</span>
+    <span id="prog-pct">0%</span>
   </div>
+  <div class="progress-track"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+
   <div class="divider"></div>
+
   <div class="tabs">
     <button class="tab active" onclick="showTab('hoje')">Hoje</button>
     <button class="tab" onclick="showTab('placar')">Placar</button>
+    <button class="tab" onclick="showTab('historico')">Histórico</button>
   </div>
+
+  <!-- TAB HOJE -->
   <div id="tab-hoje">
     <div class="score-grid">
       <div class="score-card" id="card-c-hoje"><div class="score-name">Camila</div><div class="score-num" id="pts-c-hoje">0</div><div class="score-label">pts hoje</div></div>
       <div class="score-card" id="card-b-hoje"><div class="score-name">Bruno</div><div class="score-num" id="pts-b-hoje">0</div><div class="score-label">pts hoje</div></div>
     </div>
     <div class="section-label">Hábitos de hoje</div>
-    <div id="habits-list"></div>
-    <button class="reset-btn" onclick="resetDay()">↺ Resetar dia</button>
+    <div id="habits-list"><div class="loading">Carregando...</div></div>
+    <div class="sync-status" id="sync-status"></div>
+    <button class="reset-btn" onclick="resetDay()">↺ Resetar meu dia</button>
   </div>
+
+  <!-- TAB PLACAR -->
   <div id="tab-placar" style="display:none">
     <div class="score-grid">
       <div class="score-card" id="card-c-placar"><div class="score-name">Camila</div><div class="score-num" id="pts-c-placar">0</div><div class="score-label">pts na temporada</div></div>
       <div class="score-card" id="card-b-placar"><div class="score-name">Bruno</div><div class="score-num" id="pts-b-placar">0</div><div class="score-label">pts na temporada</div></div>
     </div>
-    <div class="section-label">Histórico recente</div>
-    <div id="history-list"></div>
     <div class="divider"></div>
     <div class="section-label">Placar geral — todas as temporadas</div>
     <div class="score-grid" style="margin-bottom:16px">
@@ -114,27 +127,311 @@
     </div>
     <button class="new-season-btn" onclick="newSeason()">🏆 Encerrar temporada e iniciar nova</button>
   </div>
+
+  <!-- TAB HISTÓRICO -->
+  <div id="tab-historico" style="display:none">
+    <div class="filter-row">
+      <button class="filter-btn active" onclick="setFilter('todos')" id="filter-todos">Todos</button>
+      <button class="filter-btn" onclick="setFilter('camila')" id="filter-camila">Camila</button>
+      <button class="filter-btn" onclick="setFilter('bruno')" id="filter-bruno">Bruno</button>
+    </div>
+    <div id="history-content"><div class="loading">Carregando histórico...</div></div>
+  </div>
 </div>
+
 <script>
-const HABITS=[{id:'ativ',name:'Atividade física',icon:'🏃'},{id:'leit',name:'Leitura',icon:'📖'},{id:'diet',name:'Dieta',icon:'🥗'},{id:'agua',name:'Beber água',icon:'💧'},{id:'pess',name:'Tempo pessoal',icon:'🌱'}];
-const SEASON_WEEKS=6;
-const WEDDING=new Date('2027-04-24');
-function getState(){try{const r=localStorage.getItem('blvo_v2');if(r)return JSON.parse(r);}catch(e){}return{days:{},season:1,seasonStart:'2025-07-01',totalC:0,totalB:0};}
-function save(s){try{localStorage.setItem('blvo_v2',JSON.stringify(s));}catch(e){}}
-let S=getState();
-function todayKey(){return new Date().toISOString().slice(0,10);}
-function ensureDay(k){if(!S.days[k])S.days[k]={c:{},b:{}};return S.days[k];}
-function ptsDay(k,who){if(!S.days[k])return 0;return Object.values(S.days[k][who]||{}).filter(Boolean).length;}
-function seasonPts(){const start=new Date(S.seasonStart+'T12:00:00');let c=0,b=0;Object.entries(S.days).forEach(([k,v])=>{const d=new Date(k+'T12:00:00');if(d>=start){c+=Object.values(v.c||{}).filter(Boolean).length;b+=Object.values(v.b||{}).filter(Boolean).length;}});return{c,b};}
-function renderSeason(){const start=new Date(S.seasonStart+'T12:00:00');const end=new Date(start);end.setDate(end.getDate()+SEASON_WEEKS*7-1);const now=new Date();const daysLeft=Math.max(0,Math.ceil((end-now)/86400000));const total=SEASON_WEEKS*7;const elapsed=Math.min(total,Math.max(0,Math.ceil((now-start)/86400000)));const pct=Math.round((elapsed/total)*100);const wDays=Math.max(0,Math.ceil((WEDDING-now)/86400000));const fmt=d=>d.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'});document.getElementById('season-name').textContent='Temporada '+S.season;document.getElementById('season-dates').textContent=fmt(start)+' – '+fmt(end);document.getElementById('days-season').textContent=daysLeft;document.getElementById('days-wedding').textContent=wDays+' dias p/ casamento';document.getElementById('prog-pct').textContent=pct+'%';document.getElementById('prog-fill').style.width=pct+'%';}
-function renderHabits(){const k=todayKey();const td=ensureDay(k);const recentKeys=Object.keys(S.days).sort().slice(-7).filter(d=>d!==k);document.getElementById('pts-c-hoje').textContent=ptsDay(k,'c');document.getElementById('pts-b-hoje').textContent=ptsDay(k,'b');const list=document.getElementById('habits-list');list.innerHTML=HABITS.map(h=>{const dC=td.c[h.id]||false;const dB=td.b[h.id]||false;const dots=recentKeys.map(rk=>{const rc=S.days[rk]?.c?.[h.id];const rb=S.days[rk]?.b?.[h.id];const cls=rc&&rb?'both':rc?'c':rb?'b':'';const sym=rc||rb?'✓':'';return`<div class="streak-dot ${cls}">${sym}</div>`;}).join('');return`<div class="habit-card"><div class="habit-header"><div class="habit-name"><span>${h.icon}</span>${h.name}</div><span class="habit-pts">1 pt</span></div><div class="check-row"><button class="check-btn ${dC?'done-c':''}" onclick="toggle('${h.id}','c')">${dC?'✓':'○'} Camila</button><button class="check-btn ${dB?'done-b':''}" onclick="toggle('${h.id}','b')">${dB?'✓':'○'} Bruno</button></div>${recentKeys.length?`<div class="streak-row">${dots}</div>`:''}</div>`;}).join('');updateLeading();}
-function updateLeading(){const k=todayKey();const c=ptsDay(k,'c'),b=ptsDay(k,'b');['card-c-hoje','card-b-hoje'].forEach(id=>{const el=document.getElementById(id);el.classList.remove('leading');el.querySelector('.leading-badge')?.remove();});if(c>b){const el=document.getElementById('card-c-hoje');el.classList.add('leading');el.insertAdjacentHTML('beforeend','<div class="leading-badge">na frente 🏆</div>');}else if(b>c){const el=document.getElementById('card-b-hoje');el.classList.add('leading');el.insertAdjacentHTML('beforeend','<div class="leading-badge">na frente 🏆</div>');}}
-function toggle(id,who){const k=todayKey();ensureDay(k);S.days[k][who][id]=!S.days[k][who][id];save(S);renderHabits();renderPlacar();}
-function resetDay(){if(!confirm('Resetar todos os hábitos de hoje?'))return;const k=todayKey();S.days[k]={c:{},b:{}};save(S);renderHabits();renderPlacar();}
-function renderPlacar(){const{c,b}=seasonPts();document.getElementById('pts-c-placar').textContent=c;document.getElementById('pts-b-placar').textContent=b;document.getElementById('total-c').textContent=S.totalC+c;document.getElementById('total-b').textContent=S.totalB+b;['card-c-placar','card-b-placar'].forEach(id=>{const el=document.getElementById(id);el.classList.remove('leading');el.querySelector('.leading-badge')?.remove();});const{c:sc,b:sb}=seasonPts();if(sc>sb){const el=document.getElementById('card-c-placar');el.classList.add('leading');el.insertAdjacentHTML('beforeend','<div class="leading-badge">na frente 🏆</div>');}else if(sb>sc){const el=document.getElementById('card-b-placar');el.classList.add('leading');el.insertAdjacentHTML('beforeend','<div class="leading-badge">na frente 🏆</div>');}const hist=document.getElementById('history-list');const recent=Object.entries(S.days).sort((a,b)=>b[0].localeCompare(a[0])).slice(0,8);if(!recent.length){hist.innerHTML='<div class="empty-state">Nenhum registro ainda — começa hoje! 🌟</div>';return;}hist.innerHTML=recent.map(([date,v])=>{const pc=Object.values(v.c||{}).filter(Boolean).length;const pb=Object.values(v.b||{}).filter(Boolean).length;const d=new Date(date+'T12:00:00');const label=d.toLocaleDateString('pt-BR',{weekday:'short',day:'2-digit',month:'short'});return`<div class="history-row"><span class="history-date">${label}</span><div class="history-pts"><span class="pt-c">C: ${pc}pts</span><span class="pt-b">B: ${pb}pts</span></div></div>`;}).join('');}
-function newSeason(){const{c,b}=seasonPts();const winner=c>b?'Camila':b>c?'Bruno':'Empate';const msg=winner==='Empate'?`Temporada ${S.season} encerrada! Foi um empate — ${c} x ${b} pts.\n\nIniciar Temporada ${S.season+1}?`:`Temporada ${S.season} encerrada!\n🏆 Vencedor: ${winner} (${Math.max(c,b)} x ${Math.min(c,b)} pts)\n\nIniciar Temporada ${S.season+1}?`;if(!confirm(msg))return;S.totalC+=c;S.totalB+=b;S.season+=1;const newStart=new Date(S.seasonStart+'T12:00:00');newStart.setDate(newStart.getDate()+SEASON_WEEKS*7);S.seasonStart=newStart.toISOString().slice(0,10);save(S);renderSeason();renderHabits();renderPlacar();alert(`Temporada ${S.season} começou! Bora! 🚀`);}
-function showTab(t){document.getElementById('tab-hoje').style.display=t==='hoje'?'block':'none';document.getElementById('tab-placar').style.display=t==='placar'?'block':'none';document.querySelectorAll('.tab').forEach((el,i)=>{el.classList.toggle('active',(i===0&&t==='hoje')||(i===1&&t==='placar'));});}
-renderSeason();renderHabits();renderPlacar();
+const SUPABASE_URL = 'https://invirhgmosbrpdbplcet.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImludmlyaGdtb3NicnBkYnBsY2V0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1Mzg0OTAsImV4cCI6MjA5NzExNDQ5MH0.n9W-HmeojXnKsEErHv2cH6Vt0E7vqPGWMl7Adnf7cnQ';
+
+const HABITS = [
+  {id:'ativ', name:'Atividade física', icon:'🏃'},
+  {id:'leit', name:'Leitura', icon:'📖'},
+  {id:'diet', name:'Dieta', icon:'🥗'},
+  {id:'agua', name:'Beber água', icon:'💧'},
+  {id:'pess', name:'Tempo pessoal', icon:'🌱'},
+];
+
+const SEASON_WEEKS = 6;
+const WEDDING = new Date('2027-04-24');
+
+let STATE = {season:1, seasonStart:'2025-07-01', totalC:0, totalB:0};
+let allData = [];
+let historyFilter = 'todos';
+
+function todayKey() { return new Date().toISOString().slice(0,10); }
+
+async function sbFetch(path, options={}) {
+  const res = await fetch(SUPABASE_URL + '/rest/v1/' + path, {
+    headers: {
+      'apikey': SUPABASE_KEY,
+      'Authorization': 'Bearer ' + SUPABASE_KEY,
+      'Content-Type': 'application/json',
+      'Prefer': options.prefer || 'return=representation',
+      ...options.headers
+    },
+    ...options
+  });
+  if (!res.ok) throw new Error(await res.text());
+  const txt = await res.text();
+  return txt ? JSON.parse(txt) : [];
+}
+
+async function loadData() {
+  try {
+    const rows = await sbFetch('habitos?select=*&order=data.desc');
+    allData = rows;
+    return rows;
+  } catch(e) {
+    setSyncStatus('Erro ao carregar dados');
+    return [];
+  }
+}
+
+async function toggleHabit(habitId, pessoa) {
+  const data = todayKey();
+  const existing = allData.find(r => r.data === data && r.pessoa === pessoa && r.habito === habitId);
+  try {
+    if (existing) {
+      await sbFetch(`habitos?id=eq.${existing.id}`, {
+        method: 'PATCH',
+        prefer: 'return=representation',
+        body: JSON.stringify({feito: !existing.feito})
+      });
+      existing.feito = !existing.feito;
+    } else {
+      const novo = await sbFetch('habitos', {
+        method: 'POST',
+        body: JSON.stringify({data, pessoa, habito: habitId, feito: true})
+      });
+      allData.push(novo[0]);
+    }
+    setSyncStatus('✓ Salvo');
+    setTimeout(() => setSyncStatus(''), 2000);
+    renderHabits();
+    renderPlacar();
+    if (document.getElementById('tab-historico').style.display !== 'none') renderHistory();
+  } catch(e) {
+    setSyncStatus('Erro ao salvar');
+  }
+}
+
+async function resetDay() {
+  if (!confirm('Resetar seus hábitos de hoje?')) return;
+  const data = todayKey();
+  try {
+    // Detecta quem está usando (pergunta simples)
+    const pessoa = confirm('Você é a Camila? (Cancelar = Bruno)') ? 'c' : 'b';
+    await sbFetch(`habitos?data=eq.${data}&pessoa=eq.${pessoa}`, {method:'DELETE', prefer:''});
+    allData = allData.filter(r => !(r.data === data && r.pessoa === pessoa));
+    renderHabits();
+    renderPlacar();
+  } catch(e) { setSyncStatus('Erro ao resetar'); }
+}
+
+function setSyncStatus(msg) {
+  document.getElementById('sync-status').textContent = msg;
+}
+
+function getPtsDay(data, pessoa) {
+  return allData.filter(r => r.data === data && r.pessoa === pessoa && r.feito).length;
+}
+
+function getSeasonPts() {
+  const start = new Date(STATE.seasonStart + 'T00:00:00');
+  const seasonData = allData.filter(r => new Date(r.data + 'T00:00:00') >= start && r.feito);
+  const c = seasonData.filter(r => r.pessoa === 'c').length;
+  const b = seasonData.filter(r => r.pessoa === 'b').length;
+  return {c, b};
+}
+
+function renderSeason() {
+  const start = new Date(STATE.seasonStart + 'T12:00:00');
+  const end = new Date(start);
+  end.setDate(end.getDate() + SEASON_WEEKS * 7 - 1);
+  const now = new Date();
+  const daysLeft = Math.max(0, Math.ceil((end - now) / 86400000));
+  const total = SEASON_WEEKS * 7;
+  const elapsed = Math.min(total, Math.max(0, Math.ceil((now - start) / 86400000)));
+  const pct = Math.round((elapsed / total) * 100);
+  const wDays = Math.max(0, Math.ceil((WEDDING - now) / 86400000));
+  const fmt = d => d.toLocaleDateString('pt-BR', {day:'2-digit', month:'short'});
+  document.getElementById('season-name').textContent = 'Temporada ' + STATE.season;
+  document.getElementById('season-dates').textContent = fmt(start) + ' – ' + fmt(end);
+  document.getElementById('days-season').textContent = daysLeft;
+  document.getElementById('days-wedding').textContent = wDays + ' dias p/ casamento 💍';
+  document.getElementById('prog-pct').textContent = pct + '%';
+  document.getElementById('prog-fill').style.width = pct + '%';
+}
+
+function renderHabits() {
+  const k = todayKey();
+  const todayRows = allData.filter(r => r.data === k);
+
+  const ptC = getPtsDay(k, 'c');
+  const ptB = getPtsDay(k, 'b');
+  document.getElementById('pts-c-hoje').textContent = ptC;
+  document.getElementById('pts-b-hoje').textContent = ptB;
+
+  // últimos 7 dias exceto hoje
+  const allDates = [...new Set(allData.map(r => r.data))].sort().filter(d => d !== k).slice(-7);
+
+  const list = document.getElementById('habits-list');
+  list.innerHTML = HABITS.map(h => {
+    const dC = todayRows.find(r => r.habito === h.id && r.pessoa === 'c')?.feito || false;
+    const dB = todayRows.find(r => r.habito === h.id && r.pessoa === 'b')?.feito || false;
+    const dots = allDates.map(date => {
+      const rc = allData.find(r => r.data === date && r.habito === h.id && r.pessoa === 'c')?.feito;
+      const rb = allData.find(r => r.data === date && r.habito === h.id && r.pessoa === 'b')?.feito;
+      const cls = rc && rb ? 'both' : rc ? 'c' : rb ? 'b' : '';
+      return `<div class="streak-dot ${cls}" title="${date}">${rc||rb?'✓':''}</div>`;
+    }).join('');
+    return `<div class="habit-card">
+      <div class="habit-header">
+        <div class="habit-name"><span>${h.icon}</span>${h.name}</div>
+        <span class="habit-pts">1 pt</span>
+      </div>
+      <div class="check-row">
+        <button class="check-btn ${dC?'done-c':''}" onclick="toggleHabit('${h.id}','c')">${dC?'✓':'○'} Camila</button>
+        <button class="check-btn ${dB?'done-b':''}" onclick="toggleHabit('${h.id}','b')">${dB?'✓':'○'} Bruno</button>
+      </div>
+      ${allDates.length ? `<div class="streak-row">${dots}</div>` : ''}
+    </div>`;
+  }).join('');
+
+  updateLeading('c-hoje', 'b-hoje', ptC, ptB);
+}
+
+function renderPlacar() {
+  const {c, b} = getSeasonPts();
+  document.getElementById('pts-c-placar').textContent = c;
+  document.getElementById('pts-b-placar').textContent = b;
+  document.getElementById('total-c').textContent = STATE.totalC + c;
+  document.getElementById('total-b').textContent = STATE.totalB + b;
+  updateLeading('c-placar', 'b-placar', c, b);
+}
+
+function updateLeading(idC, idB, ptC, ptB) {
+  [idC, idB].forEach(id => {
+    const el = document.getElementById('card-' + id);
+    if (!el) return;
+    el.classList.remove('leading');
+    el.querySelector('.leading-badge')?.remove();
+  });
+  if (ptC > ptB) {
+    const el = document.getElementById('card-' + idC);
+    el.classList.add('leading');
+    el.insertAdjacentHTML('beforeend', '<div class="leading-badge">na frente 🏆</div>');
+  } else if (ptB > ptC) {
+    const el = document.getElementById('card-' + idB);
+    el.classList.add('leading');
+    el.insertAdjacentHTML('beforeend', '<div class="leading-badge">na frente 🏆</div>');
+  }
+}
+
+function setFilter(f) {
+  historyFilter = f;
+  ['todos','camila','bruno'].forEach(x => {
+    document.getElementById('filter-'+x).classList.toggle('active', x === f);
+  });
+  renderHistory();
+}
+
+function renderHistory() {
+  const content = document.getElementById('history-content');
+  const allDates = [...new Set(allData.map(r => r.data))].sort().reverse();
+
+  if (!allDates.length) {
+    content.innerHTML = '<div class="empty-state">Nenhum registro ainda — começa em julho! 🌟</div>';
+    return;
+  }
+
+  const rows = allDates.map(date => {
+    const d = new Date(date + 'T12:00:00');
+    const label = d.toLocaleDateString('pt-BR', {weekday:'short', day:'2-digit', month:'short', year:'2-digit'});
+    const ptC = getPtsDay(date, 'c');
+    const ptB = getPtsDay(date, 'b');
+
+    // hábito por hábito nesse dia
+    const habitCells = HABITS.map(h => {
+      const rc = allData.find(r => r.data === date && r.habito === h.id && r.pessoa === 'c')?.feito;
+      const rb = allData.find(r => r.data === date && r.habito === h.id && r.pessoa === 'b')?.feito;
+      const cls = rc && rb ? 'both' : rc ? 'c' : rb ? 'b' : '';
+      return `<td style="text-align:center"><div class="streak-dot ${cls}" style="margin:0 auto">${rc||rb?'✓':''}</div></td>`;
+    }).join('');
+
+    if (historyFilter === 'camila') {
+      return `<tr><td>${label}</td>${HABITS.map(h => {
+        const rc = allData.find(r => r.data === date && r.habito === h.id && r.pessoa === 'c')?.feito;
+        return `<td style="text-align:center"><div class="streak-dot ${rc?'c':''}" style="margin:0 auto">${rc?'✓':''}</div></td>`;
+      }).join('')}<td class="pt-c">${ptC}pts</td></tr>`;
+    }
+    if (historyFilter === 'bruno') {
+      return `<tr><td>${label}</td>${HABITS.map(h => {
+        const rb = allData.find(r => r.data === date && r.habito === h.id && r.pessoa === 'b')?.feito;
+        return `<td style="text-align:center"><div class="streak-dot ${rb?'b':''}" style="margin:0 auto">${rb?'✓':''}</div></td>`;
+      }).join('')}<td class="pt-b">${ptB}pts</td></tr>`;
+    }
+
+    return `<tr><td>${label}</td>${habitCells}<td><span class="pt-c">${ptC}</span>/<span class="pt-b">${ptB}</span></td></tr>`;
+  }).join('');
+
+  const ptHeader = historyFilter === 'camila' ? '<th>Pts C</th>' : historyFilter === 'bruno' ? '<th>Pts B</th>' : '<th>C/B</th>';
+  const habitHeaders = HABITS.map(h => `<th title="${h.name}">${h.icon}</th>`).join('');
+
+  content.innerHTML = `<div style="overflow-x:auto"><table class="history-table">
+    <thead><tr><th>Dia</th>${habitHeaders}${ptHeader}</tr></thead>
+    <tbody>${rows}</tbody>
+  </table></div>`;
+}
+
+async function newSeason() {
+  const {c, b} = getSeasonPts();
+  const winner = c > b ? 'Camila' : b > c ? 'Bruno' : 'Empate';
+  const msg = winner === 'Empate'
+    ? `Temporada ${STATE.season} encerrada! Empate — ${c} x ${b} pts.\n\nIniciar Temporada ${STATE.season+1}?`
+    : `Temporada ${STATE.season} encerrada!\n🏆 Vencedor: ${winner} (${Math.max(c,b)} x ${Math.min(c,b)} pts)\n\nIniciar Temporada ${STATE.season+1}?`;
+  if (!confirm(msg)) return;
+  STATE.totalC += c;
+  STATE.totalB += b;
+  STATE.season += 1;
+  const newStart = new Date(STATE.seasonStart + 'T12:00:00');
+  newStart.setDate(newStart.getDate() + SEASON_WEEKS * 7);
+  STATE.seasonStart = newStart.toISOString().slice(0,10);
+  localStorage.setItem('blvo_state', JSON.stringify(STATE));
+  renderSeason();
+  renderPlacar();
+  alert(`Temporada ${STATE.season} começou! Bora! 🚀`);
+}
+
+function showTab(t) {
+  ['hoje','placar','historico'].forEach(x => {
+    document.getElementById('tab-'+x).style.display = x === t ? 'block' : 'none';
+  });
+  document.querySelectorAll('.tab').forEach((el,i) => {
+    el.classList.toggle('active', ['hoje','placar','historico'][i] === t);
+  });
+  if (t === 'historico') renderHistory();
+}
+
+async function init() {
+  const saved = localStorage.getItem('blvo_state');
+  if (saved) STATE = JSON.parse(saved);
+  renderSeason();
+  setSyncStatus('Sincronizando...');
+  await loadData();
+  setSyncStatus('');
+  renderHabits();
+  renderPlacar();
+  // atualiza a cada 30 segundos
+  setInterval(async () => {
+    await loadData();
+    renderHabits();
+    renderPlacar();
+    if (document.getElementById('tab-historico').style.display !== 'none') renderHistory();
+  }, 30000);
+}
+
+init();
 </script>
 </body>
 </html>
